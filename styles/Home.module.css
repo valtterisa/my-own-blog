@@ -1,0 +1,68 @@
+.main {
+  padding: 5rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+    background: lightgray;
+    background-size: 170px 170px;
+    border-radius: 50%;
+    width: 170px;
+    height: 170px;
+    margin: 20px 0 20px 0;
+}
+
+.hrline {
+  border-top: 1.5px solid lightgrey;
+  width: 100%;
+  margin: 80px 0 80px 0;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 0.5rem;
+}
+
+.card {
+  border: none;
+  position: relative;
+  border-radius: 6px;
+  box-shadow: 0 8px 5px 0.5px lightgray;
+  width: 250px;
+  height: 350px;
+}
+
+.cardtausta {
+  display: block;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-size: 250px 200px;
+  width: 250px;
+  height: 200px;
+}
+
+.cardtext {
+  padding: 5px 10px 0 10px;
+  font-weight: 700;
+}
+
+.carddate {
+  padding: 0 20px 5px 0;
+  color: gray;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
