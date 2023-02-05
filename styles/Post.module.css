@@ -1,0 +1,22 @@
+.container {
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    width: 820px;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 2rem;
+}
+
+.hrline {
+    border-top: 1.5px solid lightgrey;
+    width: 100%;
+    margin: 50px 0 50px 0;
+}
+
+

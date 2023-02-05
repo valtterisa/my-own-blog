@@ -1,22 +1,39 @@
-import { Image, StructuredText, useQuerySubscription } from "react-datocms";
+import React from 'react'
 import styles from '../../styles/Post.module.css'
+import {useQuerySubscription } from "react-datocms";
 import { request } from "../../lib/datocms";
+import Post from '../../components/Post';
+import BlogCards from '../../components/BlogCards';
+import Footer from '../../components/Footer';
 
 export default function BlogPost(props) {
 
+    // FULL BLOGPOST DATA
     const { data } = useQuerySubscription(props.subscription);
     const postData = data.artikkeli;
 
+    // BLOG CARD DATA
+    const { cardData } = props;
+    const posts = cardData.allArtikkelis;
+
     return (
-        <div>
-            <Image data={postData.taustakuva}/>
-            <h1>{postData.otsikko}</h1>
-            <StructuredText data={postData.kontentti.value} />
+      <div>
+        <div className={styles.container}>
+
+          {/* POST CONTENT */}
+          <Post data={postData}/>
+
+          {/* BLOG-CARDS */}
+          <BlogCards data={posts} />
+          
         </div>
+        <Footer />
+      </div>
+
   )
 }
 
-// -- LUODAAN UUSI SIVU --
+// GENERATE NEW PAGE
 const PATH_QUERY = `
 query MyQuery {
     allArtikkelis {
@@ -39,15 +56,17 @@ export async function getStaticPaths(context) {
     };
 };
 
-// LUODAAN BLOGIPOSTAUS
+// CREATE BLOGPOST
 const FULL_POST_QUERY = `
 query MyQuery($slug: String) {
     artikkeli(filter: {slug: {eq: $slug}}) {
         kontentti {
           value
         }
+        author
         otsikko
         slug
+        julkaisupIv
         taustakuva {
           responsiveImage {
             alt
@@ -66,15 +85,34 @@ query MyQuery($slug: String) {
     }
 }`
 
-export async function getStaticProps({ params, preview }) {
+const HOMEPAGE_QUERY = `query MyQuery {
+  allArtikkelis(first: 3, orderBy: _createdAt_DESC) {
+    kontentti {
+      value
+    }
+    julkaisupIv
+    otsikko
+    slug
+    taustakuva {
+      url
+    }
+  }
+}`;
+
+export async function getStaticProps({ params, preview, context }) {
     const graphqlRequest = {
       query: FULL_POST_QUERY,
       variables: { slug: params.slug },
-      // If true, the Content Delivery API with draft content will be used
       preview,
     };
+
+    const cardData = await request({
+      query: HOMEPAGE_QUERY,
+    });
+
     return {
       props: {
+        cardData,
         subscription: preview
           ? {
               ...graphqlRequest,
@@ -85,6 +123,7 @@ export async function getStaticProps({ params, preview }) {
               enabled: false,
               initialData: await request(graphqlRequest),
             },
+            
       },
       revalidate: 120,
     };

@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+    height: 400px;
+    background-color: rgba(45, 42, 56, 255);
+    color: white;
+}
+
+.logo {
+    padding-left: 10rem;
+}
+
+.footerBlog {
+    display: flex;
+    flex-direction: column;
+    padding-left: 15rem;
+}
+
+.footerLinks {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column-reverse;
+        height: 450px;
+    }
+
+    .footerBlog {
+        padding: 4rem 0 0 0;
+    }
+
+    .logo {
+        padding: 4rem 0 0 0;
+    }
+
+    .logo > svg {
+        width: 150px;
+        height: 50px;
+    }
+}

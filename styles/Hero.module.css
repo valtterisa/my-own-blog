@@ -1,0 +1,21 @@
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profilepic {
+  background: lightgray;
+  border-radius: 50%;
+  width: 170px !important;
+  height: 170px !important;
+  margin: 20px 0 20px 0;
+}
+
+@media screen and (max-width: 768px) {
+    .hero > p {
+      max-width: 50%;
+      text-align: center;
+    }  
+}

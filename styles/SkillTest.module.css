@@ -1,0 +1,146 @@
+.container {
+    padding-top: 2rem;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2rem;
+    background-color: rgba(45, 42, 56, 255);
+    color: white;
+}
+
+.span {
+    display: inline-block;
+    background-image: linear-gradient(45deg, lightgray, rgba(45, 42, 56, 255));
+    background-size: 100%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(45deg, lightgray, rgba(45, 42, 56, 255));
+    border-image-slice: 1;
+    padding-bottom: 2px;
+}
+
+.maincontent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+.maincontent::before {
+    content: " ";
+    z-index: -1;
+    position: absolute;
+    clip-path: polygon(0 0, 40% 0, 60% 100%, 0% 100%);
+    background-position: top;
+    background: url('/images/space.jpg');
+    background-position: 20% 80%;
+    background-size: cover;
+    width: 100%;
+    height: 400px;
+}
+
+.maincontent:hover::before {
+    content: " ";
+    z-index: -1;
+    position: absolute;
+    clip-path: polygon(0 0, 40% 0, 60% 100%, 0% 100%);
+    background: url('/images/apuKoneella.jpeg') center no-repeat;
+    background-position: 20% 80%;
+    background-size: 350px 350px;
+    width: 100%;
+    height: 400px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    padding-right: 10rem;
+}
+
+.inputField {
+    position: relative;
+    border: 3px solid lightgray;
+    border-radius: 8px;
+    margin: 20px;
+}
+
+.input {
+    padding: var(--padding);
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    font-size: 16px;
+    line-height: var(--line-height);
+}
+
+
+.input::placeholder {
+    color: transparent;
+}
+
+.inputField:hover {
+    border: 3px solid rgb(190, 189, 189);
+}
+
+.inputField:focus-within  {
+    border-color: rgb(65, 8, 198);
+}
+
+.inputField .input:focus,
+.inputField:hover .input {
+    color: black
+}
+
+.label {
+    position: absolute;
+    background-color: transparent;
+    padding: var(--padding);
+    line-height: var(--line-height);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    color: gray;
+    cursor: text;
+    pointer-events: none;
+    transition: all 0.15s ease-out;
+}
+
+.inputField:focus-within .label {
+    color: rgb(65, 8, 198);
+}
+
+/* Label tekstin yläpuolella */
+.inputField:focus-within .label,
+.inputField .input:not(:placeholder-shown) ~ .label {
+    padding: 0px 8px;
+    background-color: var(--body);
+    transition: all 0.15s ease-out;
+    top: -12px;
+    left: 16px;
+    bottom: auto; 
+}
+
+@media screen and (max-width: 768px) {
+    .maincontent::before, .maincontent:hover::before  {
+        clip-path: none;
+        background: none;
+    }
+
+    .inputGroup {
+        padding: 0;
+        right: auto; 
+    }
+}

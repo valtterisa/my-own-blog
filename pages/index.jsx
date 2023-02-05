@@ -1,11 +1,46 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css';
 import { request } from "../lib/datocms";
+import styles from '../styles/Home.module.css';
+import BlogCards from '../components/BlogCards';
+import HeroSection from '../components/HeroSection';
+import SkillTest from '../components/SkillTest';
+import Footer from '../components/Footer';
 
-import BlogCard from '../components/BlogCard';
+export default function Home(props) {
+
+  const { blogPostData } = props; // access data
+  const { profileData } = props;
+
+  const posts = blogPostData.allArtikkelis;
+
+  const profile = profileData.profile;
+
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Create Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main className={styles.main} >
+
+        {/* HEROSECTION */}
+        <HeroSection data={profile} />
+        
+        {/* BLOG-CARDS */}
+        <BlogCards data={posts} />
+
+        <SkillTest />
+
+        <Footer />
+      </main>
+
+    </div>
+  )
+}
 
 const HOMEPAGE_QUERY = `query MyQuery {
-  allArtikkelis {
+  allArtikkelis(first: 3, orderBy: _createdAt_DESC) {
     kontentti {
       value
     }
@@ -18,63 +53,40 @@ const HOMEPAGE_QUERY = `query MyQuery {
   }
 }`;
 
+const PROFILE_INFO_QUERY = `query MyQuery {
+  profile {
+    aboutMe
+    profilePic {
+      responsiveImage {
+        alt
+        aspectRatio
+        base64
+        bgColor
+        sizes
+        height
+        src
+        srcSet
+        title
+        width
+        webpSrcSet
+      }
+    }
+  }
+}`
+
 export async function getStaticProps(context) {
-  const data = await request({
+  const blogPostData = await request({
     query: HOMEPAGE_QUERY,
     preview: context.preview,
   });
+
+  const profileData = await request({
+    query: PROFILE_INFO_QUERY,
+    preview: context.preview,
+  });
+
   return {
-    props: { data },
+    props: { blogPostData, 
+        profileData },
   };
-}
-
-export default function Home(props) {
-
-  const { data } = props; // access data
-  const posts = data.allArtikkelis;
-  
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        {/* HEROSECTION */}
-        <div className={styles.hero}>
-          <h1>My Blog</h1>
-          <div className={styles.circle}>
-          </div>
-          <p>Write a short description about yourself here. Or anything else you want.</p>
-        </div>
-        
-        {/* BLOG-CARDS */}
-        <div>
-          <div className={styles.hrline}/>
-          <h1>Blog</h1>
-
-          {/* Etusivun uusimmat blogi-postaukset */}
-          <div className={styles.cards}>
-            {posts.slice(0,3).map((p) => (
-              <BlogCard key={p.id} data={p} />
-            ))}
-          </div>
-          </div>
-      </main>
-
-      <style jsx>{`
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-      `}</style>
-     
-
-    </div>
-  )
 }
