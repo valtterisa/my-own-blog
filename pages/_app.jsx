@@ -7,7 +7,7 @@ function App( { Component, pageProps }) {
     <>  
         {/* Google Analytics 4 */}
         <Script async 
-            src="https://www.googletagmanager.com/gtag/js?id=G-WW96NP0QD1" />
+            src='https://www.googletagmanager.com/gtag/js?id=G-WW96NP0QD1' />
         <Script>
             {`window.dataLayer = window.dataLayer || [];
             function gtag(){
@@ -15,7 +15,6 @@ function App( { Component, pageProps }) {
             }
             gtag('js', new Date());
             gtag('config', ${process.env.GA_ANALYTICS_TAG}, { 'cookieFlags': 'SameSite=None; Secure' });
-
             `}
         </Script>
 

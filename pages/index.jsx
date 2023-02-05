@@ -20,6 +20,7 @@ export default function Home(props) {
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
+        
       </Head>
 
       <main className={styles.main} >
