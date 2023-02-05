@@ -7,6 +7,7 @@ function Post(props) {
 
     // FULL BLOGPOST DATA
     const { data } = props;
+    const { subData } = props;
 
     // DATE FORMAT
     const timestamp = new Date(data.julkaisupIv).getTime();
@@ -21,10 +22,10 @@ function Post(props) {
     return (
         <div className={styles.content}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <p>
-                {data.author}
-              </p>
-              <p>
+              <span style={{ display: "flex", alignItems: "center"}}>
+              <Image className={styles.profilepic} data={subData.profilePic.responsiveImage}/>{data.author}
+              </span>
+              <p style={{ display: "flex", alignItems: "center"}}>
                 {FormattedDate}
               </p>
             </div>

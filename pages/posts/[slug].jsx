@@ -11,6 +11,7 @@ export default function BlogPost(props) {
     // FULL BLOGPOST DATA
     const { data } = useQuerySubscription(props.subscription);
     const postData = data.artikkeli;
+    const profileData = data.profile;
 
     // BLOG CARD DATA
     const { cardData } = props;
@@ -21,11 +22,11 @@ export default function BlogPost(props) {
         <div className={styles.container}>
 
           {/* POST CONTENT */}
-          <Post data={postData}/>
+          <Post data={postData} subData={profileData}/>
 
           {/* BLOG-CARDS */}
           <BlogCards data={posts} />
-          
+
         </div>
         <Footer />
       </div>
@@ -57,33 +58,50 @@ export async function getStaticPaths(context) {
 };
 
 // CREATE BLOGPOST
-const FULL_POST_QUERY = `
-query MyQuery($slug: String) {
-    artikkeli(filter: {slug: {eq: $slug}}) {
-        kontentti {
-          value
-        }
-        author
-        otsikko
-        slug
-        julkaisupIv
-        taustakuva {
-          responsiveImage {
-            alt
-            aspectRatio
-            base64
-            bgColor
-            height
-            sizes
-            src
-            srcSet
-            title
-            webpSrcSet
-            width
-          }
-        }
+const FULL_POST_QUERY = `query MyQuery($slug: String) {
+  artikkeli(filter: {slug: {eq: $slug}}) {
+    kontentti {
+      value
     }
-}`
+    author
+    otsikko
+    slug
+    julkaisupIv
+    taustakuva {
+      responsiveImage {
+        alt
+        aspectRatio
+        base64
+        bgColor
+        height
+        sizes
+        src
+        srcSet
+        title
+        webpSrcSet
+        width
+      }
+    }
+  }
+  profile {
+    profilePic {
+      responsiveImage {
+        alt
+        aspectRatio
+        base64
+        bgColor
+        height
+        sizes
+        src
+        srcSet
+        title
+        webpSrcSet
+        width
+      }
+    }
+  }
+}
+`
 
 const HOMEPAGE_QUERY = `query MyQuery {
   allArtikkelis(first: 3, orderBy: _createdAt_DESC) {
