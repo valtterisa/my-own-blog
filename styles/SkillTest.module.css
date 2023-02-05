@@ -77,15 +77,14 @@
 }
 
 .input {
-    padding: var(--padding);
+    padding: 16px 24px;
     border: none;
     outline: none;
     background-color: transparent;
     width: 100%;
     font-size: 16px;
-    line-height: var(--line-height);
+    line-height: 24px;
 }
-
 
 .input::placeholder {
     color: transparent;
@@ -99,16 +98,11 @@
     border-color: rgb(65, 8, 198);
 }
 
-.inputField .input:focus,
-.inputField:hover .input {
-    color: black
-}
-
 .label {
     position: absolute;
     background-color: transparent;
-    padding: var(--padding);
-    line-height: var(--line-height);
+    padding: 16px 24px;
+    line-height: 24px;
     top: 0;
     left: 0;
     bottom: 0;
@@ -126,7 +120,7 @@
 .inputField:focus-within .label,
 .inputField .input:not(:placeholder-shown) ~ .label {
     padding: 0px 8px;
-    background-color: var(--body);
+    background-color: #ffffff;
     transition: all 0.15s ease-out;
     top: -12px;
     left: 16px;

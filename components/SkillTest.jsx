@@ -13,7 +13,7 @@ function SkillTest() {
         <div className={styles.maincontent}>
             <div className={styles.inputGroup}>
                 <div className={styles.inputField}>
-                  <input className={styles.input} type="text" placeholder="Label" />
+                  <input className={styles.input} type="text" placeholder="Label" required/>
                   <label className={styles.label} >Label</label>
                 </div>
 
