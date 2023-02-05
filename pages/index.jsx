@@ -18,9 +18,20 @@ export default function Home(props) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Etusivu</title>
         <link rel="icon" href="/favicon.ico" />
         
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no user-scalable=no"/>
+        <meta name="description" content="Valtteri's own blog where he shares his mind"/>
+        <meta name="author" content="Valtteri Savonen" />
+
+        <meta property="og:site_name" content="Valtteri's blog"/>
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Valtteri's blog"/>
+        <meta property="og:description" content="Valtteri's own blog where he shares his mind"/>
+        <meta property="og:image" content="https://www.datocms-assets.com/93135/1675540441-hacker.jpg?fm=webp"/>
+        <meta property="og:url" content="https://my-own-blog-omega.vercel.app/"/>
       </Head>
 
       <main className={styles.main} >
